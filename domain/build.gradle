@@ -1,9 +1,8 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion android_config.compile_sdk
     defaultConfig {
-        applicationId "com.and.movies"
         minSdkVersion android_config.min_sdk
         targetSdkVersion android_config.target_sdk
         versionCode android_config.version_code
@@ -12,7 +11,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -21,14 +20,9 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
 }
 
 dependencies {
-    implementation project(':domain')
 
-    implementation deps.support.app_compat
-    implementation deps.support.v4
-    implementation deps.support.recyclerview
-    implementation deps.support.design
-    implementation deps.constraint
 }
