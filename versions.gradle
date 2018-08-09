@@ -9,28 +9,23 @@ ext.android_config = android_config
 def versions = [:]
 
 ext.deps = [:]
-def support = [:]
+
+deps.support = [:]
 versions.support = "27.1.1"
-support.annotations = "com.android.support:support-annotations:$versions.support"
-support.app_compat = "com.android.support:appcompat-v7:$versions.support"
-support.v4 = "com.android.support:support-v4:$versions.support"
-support.recyclerview = "com.android.support:recyclerview-v7:$versions.support"
-support.design = "com.android.support:design:$versions.support"
-deps.support = support
+deps.support.annotations = "com.android.support:support-annotations:$versions.support"
+deps.support.app_compat = "com.android.support:appcompat-v7:$versions.support"
+deps.support.v4 = "com.android.support:support-v4:$versions.support"
+deps.support.recyclerview = "com.android.support:recyclerview-v7:$versions.support"
+deps.support.design = "com.android.support:design:$versions.support"
 
-def auto_value = [:]
+deps.auto_value = [:]
 versions.auto_value = "1.6.2"
-auto_value.annotations = "com.google.auto.value:auto-value-annotations:$versions.auto_value"
-auto_value.processor = "com.google.auto.value:auto-value:$versions.auto_value"
-deps.auto_value = auto_value
+deps.auto_value.annotations = "com.google.auto.value:auto-value-annotations:$versions.auto_value"
+deps.auto_value.processor = "com.google.auto.value:auto-value:$versions.auto_value"
 
 
-def constraint = [:]
 versions.constraint = "1.1.0"
-constraint = "com.android.support.constraint:constraint-layout:$versions.constraint"
-deps.constraint = constraint
-
-ext.deps = deps
+deps.constraint = "com.android.support.constraint:constraint-layout:$versions.constraint"
 
 static def addRepos(RepositoryHandler handler) {
     handler.google()
