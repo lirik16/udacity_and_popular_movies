@@ -7,6 +7,9 @@ android {
         targetSdkVersion android_config.target_sdk
         versionCode android_config.version_code
         versionName android_config.version_name
+
+        apply from: '../apikeys.gradle'
+        buildConfigField 'String', "THE_MOVIE_DB_API_KEY_V3", "\"${apikeys.themoviedb_ApiKeyV3}\""
     }
 
     buildTypes {
@@ -24,5 +27,5 @@ android {
 }
 
 dependencies {
-
+    implementation project(':domain')
 }

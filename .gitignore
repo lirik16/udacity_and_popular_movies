@@ -15,6 +15,7 @@ obj/
 
 # Local configuration file (sdk path, etc)
 local.properties
+apikeys.gradle
 
 # Windows thumbnail db
 Thumbs.db
