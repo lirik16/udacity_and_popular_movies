@@ -29,5 +29,7 @@ android {
 dependencies {
     implementation project(':domain')
 
-    implementation deps.retrofit
+    implementation deps.support.annotations
+    implementation deps.retrofit.lib
+    implementation deps.retrofit.gson_converter
 }

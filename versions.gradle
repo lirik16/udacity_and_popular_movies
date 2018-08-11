@@ -27,7 +27,9 @@ versions.constraint = "1.1.0"
 deps.constraint = "com.android.support.constraint:constraint-layout:$versions.constraint"
 
 versions.retrofit = "2.4.0"
-deps.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+deps.retrofit = [:]
+deps.retrofit.lib = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+deps.retrofit.gson_converter = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
 
 static def addRepos(RepositoryHandler handler) {
     handler.google()
