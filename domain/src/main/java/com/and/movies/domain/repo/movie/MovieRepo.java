@@ -8,5 +8,5 @@ import java.util.List;
 @WorkerThread
 public interface MovieRepo {
     @NonNull
-    List<MovieInfo> getMovies(@MoviesSortOrder final int sortOrder);
+    List<? extends MovieInfo> getMovies(@MoviesSortOrder final int sortOrder);
 }

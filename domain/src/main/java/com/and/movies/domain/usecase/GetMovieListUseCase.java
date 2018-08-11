@@ -17,7 +17,7 @@ import com.google.auto.value.AutoValue;
 
 import java.util.List;
 
-public class GetMovieListUseCase extends BaseUseCase<GetMovieListUseCase.Request, List<MovieInfo>> {
+public class GetMovieListUseCase extends BaseUseCase<GetMovieListUseCase.Request, List<? extends MovieInfo>> {
     @NonNull
     private final MovieRepo mMovieRepo;
 
@@ -30,7 +30,7 @@ public class GetMovieListUseCase extends BaseUseCase<GetMovieListUseCase.Request
     @Override
     @WorkerThread
     public void onExecute(@Nullable final Request request,
-                          @NonNull final ResponseListener<List<MovieInfo>> responseListener) {
+                          @NonNull final ResponseListener<List<? extends MovieInfo>> responseListener) {
         if (request == null) {
             responseListener.onResponse(Resource.failed(new IllegalArgumentException("Request is null")));
             return;
@@ -38,9 +38,9 @@ public class GetMovieListUseCase extends BaseUseCase<GetMovieListUseCase.Request
         responseListener.onResponse(Resource.inProgress());
 
         try {
-            final List<MovieInfo> movies = mMovieRepo.getMovies(request.getSortOrder());
+            final List<? extends MovieInfo> movies = mMovieRepo.getMovies(request.getSortOrder());
             responseListener.onResponse(Resource.succeed(movies));
-        } catch (RepoException e) {
+        } catch (RepoException | IllegalArgumentException e) {
             responseListener.onResponse(Resource.failed(e));
         }
     }
