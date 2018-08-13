@@ -31,6 +31,9 @@ deps.retrofit = [:]
 deps.retrofit.lib = "com.squareup.retrofit2:retrofit:$versions.retrofit"
 deps.retrofit.gson_converter = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
 
+versions.lifecycle = "1.1.1"
+deps.viewmodel = "android.arch.lifecycle:viewmodel:$versions.lifecycle"
+
 static def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
