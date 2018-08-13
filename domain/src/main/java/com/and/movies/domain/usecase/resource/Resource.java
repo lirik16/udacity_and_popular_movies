@@ -31,6 +31,7 @@ public class Resource<Result> {
         mException = exception;
     }
 
+    @ResourceStatus
     public int getStatus() {
         return mStatus;
     }

@@ -48,7 +48,7 @@ public class GetMovieListUseCase extends BaseUseCase<GetMovieListUseCase.Request
 
     @AutoValue
     public abstract static class Request {
-        static Request create(@MoviesSortOrder final int sortOrder) {
+        public static Request create(@MoviesSortOrder final int sortOrder) {
             return new AutoValue_GetMovieListUseCase_Request(sortOrder);
         }
 
