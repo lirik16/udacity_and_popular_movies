@@ -9,8 +9,12 @@ public abstract class BasePresenter<V extends BaseView> {
     @NonNull
     private final WeakReference<V> mView;
 
-    public BasePresenter(@NonNull final WeakReference<V> view) {
-        mView = view;
+    public BasePresenter(@NonNull final V view) {
+        mView = new WeakReference<>(view);
+    }
+
+    @UiThread
+    public void init() {
     }
 
     @UiThread

@@ -11,13 +11,18 @@ import com.and.movies.domain.repo.movie.MoviesSortOrder;
 import java.io.IOException;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
+@Singleton
 public class RetrofitMovieRepo implements MovieRepo {
     @NonNull
     private final MovieDbApi mMovieDbApi;
 
+    @Inject
     public RetrofitMovieRepo(@NonNull final MovieDbApi movieDbApi) {
         mMovieDbApi = movieDbApi;
     }

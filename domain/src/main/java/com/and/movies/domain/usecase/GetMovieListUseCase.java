@@ -17,10 +17,13 @@ import com.google.auto.value.AutoValue;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class GetMovieListUseCase extends BaseUseCase<GetMovieListUseCase.Request, List<? extends MovieInfo>> {
     @NonNull
     private final MovieRepo mMovieRepo;
 
+    @Inject
     protected GetMovieListUseCase(@NonNull final UseCaseScheduler useCaseScheduler,
                                   @NonNull final MovieRepo movieRepo) {
         super(useCaseScheduler, UseCaseDuration.LONG_RUNNING);

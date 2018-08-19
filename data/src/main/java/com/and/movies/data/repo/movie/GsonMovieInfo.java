@@ -6,9 +6,6 @@ import com.and.movies.domain.repo.movie.MovieInfo;
 import com.google.gson.annotations.SerializedName;
 
 public class GsonMovieInfo implements MovieInfo {
-    //TODO: Change to define at runtime
-    private static final String BASE_IMAGE_URL = "http://image.tmdb.org/t/p/w185";
-
     @Nullable
     @SerializedName("title")
     private final String mTitle;
@@ -52,7 +49,7 @@ public class GsonMovieInfo implements MovieInfo {
     @Nullable
     @Override
     public String getPosterPath() {
-        return BASE_IMAGE_URL + mPosterPath;
+        return mPosterPath;
     }
 
     @Nullable

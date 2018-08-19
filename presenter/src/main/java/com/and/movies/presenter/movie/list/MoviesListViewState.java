@@ -13,9 +13,14 @@ import java.util.List;
 
 public class MoviesListViewState extends ViewModel implements ViewState {
     @NonNull
-    private final ObservableList<MovieInfo> mMovieInfoList = new ObservableArrayList<>();
+    private final ObservableList<MovieInfo> mMovieInfoList;
     @NonNull
-    private final ObservableBoolean mIsLoadingMovieInfoList = new ObservableBoolean();
+    private final ObservableBoolean mIsLoadingMovieInfoList;
+
+    public MoviesListViewState() {
+        mMovieInfoList = new ObservableArrayList<>();
+        mIsLoadingMovieInfoList = new ObservableBoolean();
+    }
 
     @NonNull
     public ObservableList<MovieInfo> getMovieInfoList() {
