@@ -4,7 +4,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
 
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -12,6 +11,14 @@ buildscript {
 
 allprojects {
     addRepos(repositories)
+
+    configurations {
+        all {
+            resolutionStrategy {
+                force deps.arch.viewmodel
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {

@@ -31,5 +31,6 @@ dependencies {
     implementation project(":domain")
 
     implementation deps.support.annotations
-    implementation deps.viewmodel
+    implementation deps.arch.viewmodel
+    implementation deps.dagger.lib
 }

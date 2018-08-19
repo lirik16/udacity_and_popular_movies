@@ -17,6 +17,10 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
@@ -24,11 +28,27 @@ android {
 }
 
 dependencies {
-    implementation project(':domain')
+    implementation project(':presenter')
+    implementation project(":domain")
+    implementation project(":data")
 
     implementation deps.support.app_compat
     implementation deps.support.v4
     implementation deps.support.recyclerview
     implementation deps.support.design
     implementation deps.constraint
+    implementation deps.picasso
+    implementation deps.arch.extensions
+    implementation deps.retrofit.lib
+    implementation deps.retrofit.gson_converter
+    implementation deps.okhttp.lib
+    implementation deps.okhttp.logger
+
+    implementation deps.dagger.lib
+    annotationProcessor deps.dagger.compiler
+    implementation deps.dagger.android_lib
+    implementation deps.dagger.android_support_lib
+    annotationProcessor deps.dagger.android_compiler
+
+    testImplementation deps.junit
 }

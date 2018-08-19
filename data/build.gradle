@@ -31,5 +31,6 @@ dependencies {
 
     implementation deps.support.annotations
     implementation deps.retrofit.lib
-    implementation deps.retrofit.gson_converter
+    implementation deps.dagger.lib
+    implementation deps.gson
 }

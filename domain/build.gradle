@@ -27,4 +27,6 @@ dependencies {
     implementation deps.support.annotations
     implementation deps.auto_value.annotations
     annotationProcessor deps.auto_value.processor
+
+    implementation deps.dagger.lib
 }
