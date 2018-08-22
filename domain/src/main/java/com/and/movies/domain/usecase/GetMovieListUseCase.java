@@ -35,16 +35,16 @@ public class GetMovieListUseCase extends BaseUseCase<GetMovieListUseCase.Request
     public void onExecute(@Nullable final Request request,
                           @NonNull final ResponseListener<List<? extends MovieInfo>> responseListener) {
         if (request == null) {
-            responseListener.onResponse(Resource.failed(new IllegalArgumentException("Request is null")));
+            responseListener.response(Resource.failed(new IllegalArgumentException("Request is null")));
             return;
         }
-        responseListener.onResponse(Resource.inProgress());
+        responseListener.response(Resource.inProgress());
 
         try {
             final List<? extends MovieInfo> movies = mMovieRepo.getMovies(request.getSortOrder());
-            responseListener.onResponse(Resource.succeed(movies));
+            responseListener.response(Resource.succeed(movies));
         } catch (RepoException | IllegalArgumentException e) {
-            responseListener.onResponse(Resource.failed(e));
+            responseListener.response(Resource.failed(e));
         }
     }
 

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.and.movies.domain.thread.ThreadUtil;
 import com.and.movies.domain.usecase.base.BaseUseCase;
 import com.and.movies.domain.usecase.base.UseCaseDuration;
+import com.and.movies.domain.usecase.resource.Resource;
 import com.and.movies.domain.usecase.resource.ResponseListener;
 
 import java.util.concurrent.Executor;
@@ -24,12 +25,9 @@ public class PriorityUseCaseScheduler implements UseCaseScheduler {
     private final Executor mLongRunning;
 
     @Inject
-    public PriorityUseCaseScheduler(@Named(ThreadUtil.UI_THREAD) @NonNull
-                                    final Executor uiThread,
-                                    @Named(ThreadUtil.SHORT_TASK_THREAD) @NonNull
-                                    final Executor shortRunning,
-                                    @Named(ThreadUtil.LONG_TASK_THREAD) @NonNull
-                                    final Executor longRunning) {
+    public PriorityUseCaseScheduler(@Named(ThreadUtil.UI_THREAD) @NonNull final Executor uiThread,
+                                    @Named(ThreadUtil.SHORT_TASK_THREAD) @NonNull final Executor shortRunning,
+                                    @Named(ThreadUtil.LONG_TASK_THREAD) @NonNull final Executor longRunning) {
         mUIThread = uiThread;
         mShortRunning = shortRunning;
         mLongRunning = longRunning;
@@ -40,9 +38,12 @@ public class PriorityUseCaseScheduler implements UseCaseScheduler {
                                             @Nullable final Request request,
                                             @Nullable final ResponseListener<Response> responseListener) {
         final Runnable runnable = () -> {
-            useCase.onExecute(request, resource -> {
-                if (responseListener != null) {
-                    mUIThread.execute(() -> responseListener.onResponse(resource));
+            useCase.onExecute(request, new ResponseListener<Response>() {
+                @Override
+                public void onResponse(@NonNull final Resource<Response> resource) {
+                    if (responseListener != null) {
+                        mUIThread.execute(() -> responseListener.response(resource));
+                    }
                 }
             });
         };
