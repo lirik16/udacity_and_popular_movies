@@ -1,6 +1,8 @@
 package com.and.movies.list;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,7 +10,7 @@ import android.view.ViewGroup;
 import com.and.movies.databinding.MovieListItemBinding;
 import com.and.movies.domain.repo.movie.MovieInfo;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.ViewHolder>
@@ -18,7 +20,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     private List<MovieInfo> mMovieInfoList;
 
     public MovieListAdapter() {
-        mMovieInfoList = Collections.emptyList();
+        mMovieInfoList = new ArrayList<>();
     }
 
     @NonNull
@@ -38,15 +40,21 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     }
 
     @Override
-    public void changeDataSet(@NonNull final List<MovieInfo> dataSet) {
-        //TODO: Add DiffUtil
-        if (dataSet != null) {
-            mMovieInfoList = dataSet;
+    public void changeDataSet(@Nullable final List<MovieInfo> dataSet) {
+        if (dataSet == null || dataSet.isEmpty()) {
+            final int oldDataSetSize = mMovieInfoList.size();
+            mMovieInfoList.clear();
+            notifyItemRangeRemoved(0, oldDataSetSize);
+        } else if (mMovieInfoList.isEmpty()) {
+            mMovieInfoList.addAll(dataSet);
+            notifyItemRangeInserted(0, mMovieInfoList.size());
         } else {
-            mMovieInfoList = Collections.emptyList();
+            final MovieListDiffUtil callback = new MovieListDiffUtil(mMovieInfoList, dataSet);
+            DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
+            mMovieInfoList.clear();
+            mMovieInfoList.addAll(dataSet);
+            result.dispatchUpdatesTo(this);
         }
-
-        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
