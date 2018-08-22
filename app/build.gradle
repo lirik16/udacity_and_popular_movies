@@ -36,7 +36,7 @@ dependencies {
     implementation deps.support.v4
     implementation deps.support.recyclerview
     implementation deps.support.design
-    implementation deps.constraint
+    implementation deps.constraint.layout
     implementation deps.picasso
     implementation deps.arch.extensions
     implementation deps.retrofit.lib
