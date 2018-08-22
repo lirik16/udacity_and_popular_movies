@@ -1,6 +1,7 @@
 package com.and.movies.data.repo.movie;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.WorkerThread;
 
 import com.and.movies.data.BuildConfig;
 import com.and.movies.domain.repo.error.RepoException;
@@ -28,6 +29,7 @@ public class RetrofitMovieRepo implements MovieRepo {
     }
 
     @NonNull
+    @WorkerThread
     @Override
     public List<? extends MovieInfo> getMovies(@MoviesSortOrder final int sortOrder) {
         final Call<MovieDbResponse<GsonMovieInfo>> call;

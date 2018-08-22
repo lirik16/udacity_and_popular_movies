@@ -5,8 +5,8 @@ import android.support.annotation.WorkerThread;
 
 import java.util.List;
 
-@WorkerThread
 public interface MovieRepo {
     @NonNull
+    @WorkerThread
     List<? extends MovieInfo> getMovies(@MoviesSortOrder final int sortOrder);
 }
