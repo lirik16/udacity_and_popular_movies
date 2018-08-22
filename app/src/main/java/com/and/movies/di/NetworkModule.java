@@ -1,6 +1,9 @@
 package com.and.movies.di;
 
+import com.and.movies.data.repo.movie.DataLayerAdapterFactory;
 import com.and.movies.data.repo.movie.MovieDbApi;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.inject.Singleton;
 
@@ -22,10 +25,14 @@ public class NetworkModule {
                 .addInterceptor(interceptor)
                 .build();
 
+        final Gson gson = new GsonBuilder()
+                .registerTypeAdapterFactory(DataLayerAdapterFactory.create())
+                .create();
+
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/")
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         return retrofit.create(MovieDbApi.class);

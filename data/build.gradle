@@ -33,4 +33,8 @@ dependencies {
     implementation deps.retrofit.lib
     implementation deps.dagger.lib
     implementation deps.gson
+    implementation deps.auto_value.annotations
+    annotationProcessor deps.auto_value.processor
+    implementation deps.auto_value_gson.lib
+    annotationProcessor deps.auto_value_gson.processor
 }

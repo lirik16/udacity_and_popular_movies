@@ -3,64 +3,43 @@ package com.and.movies.data.repo.movie;
 import android.support.annotation.Nullable;
 
 import com.and.movies.domain.repo.movie.MovieInfo;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-public class GsonMovieInfo implements MovieInfo {
-    @Nullable
+@AutoValue
+public abstract class GsonMovieInfo implements MovieInfo {
+
+    public static TypeAdapter<GsonMovieInfo> typeAdapter(Gson gson) {
+        return new AutoValue_GsonMovieInfo.GsonTypeAdapter(gson);
+    }
+
+    @SerializedName("id")
+    @Override
+    public abstract long getId();
+
     @SerializedName("title")
-    private final String mTitle;
     @Nullable
+    @Override
+    public abstract String getTitle();
+
     @SerializedName("release_date")
-    private final String mReleaseDate;
     @Nullable
+    @Override
+    public abstract String getReleaseDate();
+
     @SerializedName("poster_path")
-    private final String mPosterPath;
     @Nullable
+    @Override
+    public abstract String getPosterPath();
+
     @SerializedName("vote_average")
-    private final Float mVoteAverage;
-    @Nullable
+    @Override
+    public abstract float getVoteAverage();
+
     @SerializedName("overview")
-    private final String mPlot;
-
-    public GsonMovieInfo(@Nullable final String title,
-                         @Nullable final String releaseDate,
-                         @Nullable final String posterPath,
-                         @Nullable final Float voteAverage,
-                         @Nullable final String plot) {
-        mTitle = title;
-        mReleaseDate = releaseDate;
-        mPosterPath = posterPath;
-        mVoteAverage = voteAverage;
-        mPlot = plot;
-    }
-
     @Nullable
     @Override
-    public String getTitle() {
-        return mTitle;
-    }
-
-    @Nullable
-    @Override
-    public String getReleaseDate() {
-        return mReleaseDate;
-    }
-
-    @Nullable
-    @Override
-    public String getPosterPath() {
-        return mPosterPath;
-    }
-
-    @Nullable
-    @Override
-    public Float getVoteAverage() {
-        return mVoteAverage;
-    }
-
-    @Nullable
-    @Override
-    public String getPlot() {
-        return mPlot;
-    }
+    public abstract String getPlot();
 }
