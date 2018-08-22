@@ -4,26 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import
+            type="com.and.movies.list.BindingSpinnerConvertor" alias="Conv" />
+
+        <import type="com.and.movies.list.BindingSpinnerConvertor" />
 
         <variable
-            name="moviesListViewState"
+            name="viewState"
             type="com.and.movies.presenter.movie.list.MoviesListViewState" />
+
+        <variable
+            name="presenter"
+            type="com.and.movies.presenter.movie.list.MoviesListPresenter" />
     </data>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:refreshing="@{moviesListViewState.isLoadingMovieInfoList}"
-        tools:context=".list.MovieListActivity">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/item_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:items="@{moviesListViewState.movieInfoList}"
-            tools:listitem="@layout/movie_list_item" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="@dimen/toolbar_elevation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <android.support.v7.widget.AppCompatSpinner
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/movies_sort_order"
+                android:selection="@{Conv.orderToPos(viewState.moviesSortOrder)}"
+                android:onItemSelected="@{(parent, view, pos, id) -> presenter.setMoviesSortOrder(Conv.posToOrder(pos))}" />
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:onRefresh = "@{presenter}"
+            app:refreshing="@{viewState.isLoadingMovieInfoList}">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/item_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:items="@{viewState.movieInfoList}"
+                tools:listitem="@layout/movie_list_item" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>

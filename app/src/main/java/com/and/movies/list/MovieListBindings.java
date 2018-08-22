@@ -9,6 +9,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.and.movies.domain.repo.movie.MovieInfo;
+import com.and.movies.presenter.movie.list.MoviesListPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -47,5 +48,11 @@ public class MovieListBindings {
                                      final boolean isRefreshing) {
         swipeRefreshLayout.setRefreshing(isRefreshing);
 
+    }
+
+    @BindingAdapter("onRefresh")
+    public static void setOnRefresh(@NonNull final SwipeRefreshLayout swipeRefreshLayout,
+                                    @NonNull final MoviesListPresenter presenter) {
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.loadMoviesList(false));
     }
 }

@@ -29,11 +29,14 @@ public class MovieListActivity extends BaseActivity implements MoviesListView {
         super.onCreate(savedInstanceState);
         mMovieListActivityBinding = DataBindingUtil.setContentView(this, R.layout.movie_list_activity);
 
+        setSupportActionBar(mMovieListActivityBinding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         mMovieListActivityBinding.itemList.setAdapter(new MovieListAdapter());
         mMovieListActivityBinding.itemList.setLayoutManager(new GridLayoutManager(this, 2));
         mMoviesListPresenter.init();
 
-        mMoviesListPresenter.loadMoviesList();
+        mMoviesListPresenter.loadMoviesList(true);
     }
 
     @Override
@@ -55,6 +58,8 @@ public class MovieListActivity extends BaseActivity implements MoviesListView {
 
     @Override
     public void setViewState(@NonNull final MoviesListViewState viewState) {
-        mMovieListActivityBinding.setMoviesListViewState(viewState);
+        mMovieListActivityBinding.setViewState(viewState);
+        //TODO: mb databinding should depend on presenter interface
+        mMovieListActivityBinding.setPresenter(mMoviesListPresenter);
     }
 }

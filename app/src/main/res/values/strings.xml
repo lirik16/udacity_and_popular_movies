@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PopularMovies</string>
+
+    <!-- com.and.movies.list.BindingSpinnerConvertor constants depend on movies_sort_order resource
+     -->
+    <string-array name="movies_sort_order">
+        <item>Most Popular</item>
+        <item>Highest Rated</item>
+    </string-array>
 </resources>
